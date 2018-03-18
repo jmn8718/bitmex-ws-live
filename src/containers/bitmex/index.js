@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import WebSocket from 'ws';
 import { BITMEX_WS_CONNECTION_URL } from '../../constants';
 import { OrderbookL2 } from '../../handlers/OrderbookL2';
+import './index.css';
 
 const publishUpdate = (data) => {
 	console.log(JSON.stringify(data));
@@ -13,6 +14,7 @@ class Bitmex extends Component {
 		symbols: new Map(),
 		connected: false,
 		ready: false,
+		activeSymbol: '',
 	};
 	componentWillMount() {
 		const ws = new WebSocket(BITMEX_WS_CONNECTION_URL);
@@ -46,24 +48,37 @@ class Bitmex extends Component {
 
 	componentWillUnmount() {}
 
+	setActiveSymbol = (activeSymbol) => {
+		this.setState({ activeSymbol });
+	};
+
 	render() {
-		const { connected, ready, symbols } = this.state;
+		const { connected, ready, symbols, activeSymbol } = this.state;
 		return (
-			<div className="App">
-				<header className="App-header">
-					<h1 className="App-title">Welcome to React</h1>
-				</header>
+			<div className="app-container">
 				{!connected || !ready ? (
 					<p>connecting...</p>
 				) : (
-					<div className="App-intro">
-						{Array.from(symbols.values()).map(({ symbol, lastPrice }) => {
-							return (
-								<p key={symbol}>
-									{symbol}: {lastPrice}
-								</p>
-							);
-						})}
+					<div className="symbols-container">
+						<div className="symbols-list">
+							{Array.from(symbols.values()).map(({ symbol, lastPrice }) => {
+								return (
+									<div
+										key={symbol}
+										onClick={() => this.setActiveSymbol(symbol)}
+									>
+										<p>
+											{symbol}: {lastPrice}
+										</p>
+									</div>
+								);
+							})}
+						</div>
+						<div className="symbol-data">
+							{activeSymbol && (
+								<pre>{JSON.stringify(symbols.get(activeSymbol), null, 2)}</pre>
+							)}
+						</div>
 					</div>
 				)}
 			</div>
