@@ -1,3 +1,8 @@
+ln -s `pwd`/node_modules/react-grid-layout/css/styles.css ./src/styles/grid-styles.css
+ln -s `pwd`/node_modules/react-resizable/css/styles.css ./src/styles/resizable-styles.css
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
