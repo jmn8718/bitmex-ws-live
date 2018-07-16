@@ -1,10 +1,7 @@
 import React from 'react';
 import { Layout, Spin } from 'antd';
 
-import { Footer } from '../../components';
-
-import { Markets } from './markets';
-import { Info } from './info';
+import { Footer, MarketInformation, MarketsList } from '../../components';
 
 const { Content } = Layout;
 
@@ -22,9 +19,9 @@ export const ContainerLayout = ({
 					<Spin size="large" className="layout-spin" tip="Connecting..." />
 				) : (
 					<div className="layout-content">
-						<Markets data={symbols} setActiveSymbol={setActiveSymbol} />
+						<MarketsList data={symbols} setActiveSymbol={setActiveSymbol} />
 						{activeSymbol && (
-							<Info
+							<MarketInformation
 								data={symbols.get(activeSymbol)}
 								onClose={unsetActiveSymbol}
 							/>

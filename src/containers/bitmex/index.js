@@ -16,7 +16,7 @@ class Bitmex extends Component {
 
 		ws.onmessage = (evt) => {
 			const { table, action, data, success } = JSON.parse(evt.data);
-			console.log(table, action, data);
+			// console.log(table, action, data);
 			if (table === 'instrument') {
 				if (action === 'partial') {
 					const symbols = new Map();

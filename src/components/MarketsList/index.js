@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Card, Col, Row } from 'antd';
 
-import { getIconType, MarketsList } from './utils';
+import { getIconType, MARKETS_LIST } from '../../utils';
 
 const Title = ({ name, lastTickDirection }) => (
 	<div>
@@ -25,10 +25,10 @@ const MarketCard = ({
 	</Col>
 );
 
-export const Markets = ({ data, setActiveSymbol }) => {
+export const MarketsList = ({ data, setActiveSymbol }) => {
 	return (
 		<Row gutter={16}>
-			{MarketsList.map((market) => (
+			{MARKETS_LIST.filter((market) => data.has(market)).map((market) => (
 				<MarketCard
 					key={market}
 					{...data.get(market)}
