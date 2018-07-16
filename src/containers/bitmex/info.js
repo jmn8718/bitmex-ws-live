@@ -1,9 +1,15 @@
 import React from 'react';
+import { Icon, Card, Row } from 'antd';
 
-export const Info = ({ data }) => {
+export const Info = ({ data, onClose }) => {
 	return (
-		<div className="symbol-data">
-			{data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-		</div>
+		<Row gutter={16}>
+			<Card
+				title={data.symbol}
+				extra={<Icon type="close-circle" onClick={onClose} />}
+			>
+				{data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+			</Card>
+		</Row>
 	);
 };

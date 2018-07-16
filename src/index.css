@@ -15,5 +15,32 @@ body {
 }
 
 .content {
-  height: calc(100% - var(--nav-height)) !important;
+	height: calc(100% - var(--nav-height)) !important;
+}
+
+.full-layout {
+	min-height: 100vh;
+}
+
+.layout .layout-container {
+	display: flex;
+	padding: 1rem;
+}
+
+.layout .layout-container .layout-content {
+	/* background: white; */
+	flex: 1;
+	padding: 1rem;
+}
+
+.layout .layout-container .layout-spin {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	flex: 1;
+}
+
+.layout-content .ant-card-body {
+	padding: 0.75rem;
 }
