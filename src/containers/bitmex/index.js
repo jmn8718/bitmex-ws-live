@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-// import WebSocket from 'ws';
 import { BITMEX_WS_CONNECTION_URL } from '../../constants';
-import { OrderbookL2 } from '../../handlers/OrderbookL2';
+import { ContainerLayout } from './layout';
 import './index.css';
-
-const publishUpdate = (data) => {
-	console.log(JSON.stringify(data));
-};
 
 class Bitmex extends Component {
 	state = {
@@ -20,23 +15,32 @@ class Bitmex extends Component {
 		const ws = new WebSocket(BITMEX_WS_CONNECTION_URL);
 
 		ws.onmessage = (evt) => {
-			const data = JSON.parse(evt.data);
-			// console.log(data)
-			if (data.table === 'instrument') {
-				// console.log(data.data)
-				if (data.action === 'partial') {
+			const { table, action, data, success } = JSON.parse(evt.data);
+			// console.log(table, action, data);
+			if (table === 'instrument') {
+				if (action === 'partial') {
 					const symbols = new Map();
-					data.data
-						.filter((item) => item.state === 'Open')
-						.forEach((symbol) => {
-							symbols.set(symbol.symbol, symbol);
-						});
+					data.filter(({ state }) => state === 'Open').forEach((symbol) => {
+						symbols.set(symbol.symbol, symbol);
+					});
 					this.setState({
 						symbols,
 						ready: true,
 					});
+				} else if (action === 'update') {
+					const { symbols } = this.state;
+					data.forEach(({ symbol, ...item }) => {
+						if (symbols.has(symbol)) {
+							const symbolData = {
+								...symbols.get(symbol),
+								...item,
+							};
+							symbols.set(symbol, symbolData);
+						}
+					});
+					this.setState({ symbols });
 				}
-			} else if (data.success) {
+			} else if (success) {
 				this.setState({ connected: true });
 			}
 		};
@@ -46,8 +50,6 @@ class Bitmex extends Component {
 		});
 	}
 
-	componentWillUnmount() {}
-
 	setActiveSymbol = (activeSymbol) => {
 		this.setState({ activeSymbol });
 	};
@@ -55,33 +57,13 @@ class Bitmex extends Component {
 	render() {
 		const { connected, ready, symbols, activeSymbol } = this.state;
 		return (
-			<div className="app-container">
-				{!connected || !ready ? (
-					<p>connecting...</p>
-				) : (
-					<div className="symbols-container">
-						<div className="symbols-list">
-							{Array.from(symbols.values()).map(({ symbol, lastPrice }) => {
-								return (
-									<div
-										key={symbol}
-										onClick={() => this.setActiveSymbol(symbol)}
-									>
-										<p>
-											{symbol}: {lastPrice}
-										</p>
-									</div>
-								);
-							})}
-						</div>
-						<div className="symbol-data">
-							{activeSymbol && (
-								<pre>{JSON.stringify(symbols.get(activeSymbol), null, 2)}</pre>
-							)}
-						</div>
-					</div>
-				)}
-			</div>
+			<ContainerLayout
+				loading={!connected || !ready}
+				setActiveSymbol={this.setActiveSymbol}
+				unsetActiveSymbol={() => this.setActiveSymbol()}
+				activeSymbol={activeSymbol}
+				symbols={symbols}
+			/>
 		);
 	}
 }
