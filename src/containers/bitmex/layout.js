@@ -1,10 +1,12 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb, Spin, Icon } from 'antd';
 
+import { Footer } from '../../components';
+
 import { Markets } from './markets';
 import { Info } from './info';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 export const ContainerLayout = ({
 	loading,
@@ -30,25 +32,7 @@ export const ContainerLayout = ({
 					</div>
 				)}
 			</Content>
-			<Footer style={{ textAlign: 'center' }}>
-				Created by Jose Miguel
-				<a
-					href="https://github.com/jmn8718"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="link-no-decoration"
-				>
-					<Icon type="github" />
-				</a>
-				<a
-					href="https://www.linkedin.com/in/jm8nav/"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="link-no-decoration"
-				>
-					<Icon type="linkedin" />
-				</a>
-			</Footer>
+			<Footer />
 		</Layout>
 	);
 };
