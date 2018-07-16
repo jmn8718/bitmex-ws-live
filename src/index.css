@@ -29,3 +29,26 @@ body {
 .layout-content .ant-card-body {
 	padding: 0.75rem;
 }
+
+.layout-footer {
+	text-align: center;
+}
+.pointer {
+	cursor: pointer;
+}
+
+.market-card.selected {
+	background-color: lightgray;
+}
+
+.link-no-decoration:link,
+.link-no-decoration:visited,
+.link-no-decoration:hover,
+.link-no-decoration:active {
+	text-decoration: none;
+	color: inherit;
+}
+
+.link-footer {
+	padding-left: 0.5rem;
+}

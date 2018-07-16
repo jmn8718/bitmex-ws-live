@@ -19,7 +19,11 @@ export const ContainerLayout = ({
 					<Spin size="large" className="layout-spin" tip="Connecting..." />
 				) : (
 					<div className="layout-content">
-						<MarketsList data={symbols} setActiveSymbol={setActiveSymbol} />
+						<MarketsList
+							data={symbols}
+							setActiveSymbol={setActiveSymbol}
+							activeSymbol={activeSymbol}
+						/>
 						{activeSymbol && (
 							<MarketInformation
 								data={symbols.get(activeSymbol)}

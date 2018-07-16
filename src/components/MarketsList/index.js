@@ -17,16 +17,22 @@ const MarketCard = ({
 	lastPrice,
 	lastTickDirection,
 	setActiveSymbol,
+	selected,
 }) => (
 	<Col span={6} key={symbol}>
-		<Card onClick={() => setActiveSymbol(symbol)}>
+		<Card
+			onClick={() => setActiveSymbol(symbol)}
+			className={`market-card pointer ${
+				selected ? 'selected' : 'not_selected'
+			}`}
+		>
 			<Title name={rootSymbol} lastTickDirection={lastTickDirection} />
 			<p>{lastPrice}</p>
 		</Card>
 	</Col>
 );
 
-export const MarketsList = ({ data, setActiveSymbol }) => {
+export const MarketsList = ({ data, setActiveSymbol, activeSymbol }) => {
 	return (
 		<Row gutter={16}>
 			{MARKETS_LIST.filter((market) => data.has(market)).map((market) => (
@@ -34,6 +40,7 @@ export const MarketsList = ({ data, setActiveSymbol }) => {
 					key={market}
 					{...data.get(market)}
 					setActiveSymbol={setActiveSymbol}
+					selected={market === activeSymbol}
 				/>
 			))}
 		</Row>
