@@ -2,9 +2,11 @@
 	"name": "bitmex-ws-live",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "https://jmn8718.github.io/bitmex-ws-live",
 	"dependencies": {
 		"antd": "^3.7.0",
 		"bintrees": "^1.0.2",
+		"gh-pages": "^1.2.0",
 		"react": "^16.2.0",
 		"react-custom-scrollbars": "^4.2.1",
 		"react-dom": "^16.2.0",
@@ -12,6 +14,8 @@
 		"ws": "^4.0.0"
 	},
 	"scripts": {
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
 		"precommit": "pretty-quick --staged",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
