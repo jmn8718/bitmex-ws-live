@@ -1,7 +1,8 @@
 import React from 'react';
 import { Icon, Card, Col, Row } from 'antd';
 
-import { getIconType, MARKETS_LIST } from '../../utils';
+import { getIconType } from '../../utils';
+import { MARKETS_LIST } from '../../constants';
 
 const Title = ({ name, lastTickDirection }) => (
 	<div>

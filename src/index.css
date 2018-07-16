@@ -2,20 +2,6 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-
-	--nav-height: 62px;
-}
-
-.wrapper {
-	height: 100vh;
-}
-
-.navigation {
-	min-height: var(--nav-height);
-}
-
-.content {
-	height: calc(100% - var(--nav-height)) !important;
 }
 
 .full-layout {
@@ -28,7 +14,6 @@ body {
 }
 
 .layout .layout-container .layout-content {
-	/* background: white; */
 	flex: 1;
 	padding: 1rem;
 }
