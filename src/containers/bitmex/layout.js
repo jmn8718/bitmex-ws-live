@@ -1,12 +1,12 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Spin, Icon } from 'antd';
+import { Layout, Spin } from 'antd';
 
 import { Footer } from '../../components';
 
 import { Markets } from './markets';
 import { Info } from './info';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 export const ContainerLayout = ({
 	loading,

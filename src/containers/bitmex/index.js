@@ -29,7 +29,7 @@ class Bitmex extends Component {
 					});
 				} else if (action === 'update') {
 					const { symbols } = this.state;
-					data.map(({ symbol, ...item }) => {
+					data.forEach(({ symbol, ...item }) => {
 						if (symbols.has(symbol)) {
 							const symbolData = {
 								...symbols.get(symbol),
@@ -49,8 +49,6 @@ class Bitmex extends Component {
 			ws,
 		});
 	}
-
-	componentWillUnmount() {}
 
 	setActiveSymbol = (activeSymbol) => {
 		this.setState({ activeSymbol });
